@@ -105,5 +105,5 @@ theme: fluid
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:shirleyMing/ShirleyHouBlog.git
+  repo: git@github.com:shirleyMing/shirleyMing.github.io.git
   branch: matser
