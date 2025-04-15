@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Shirley.Hou">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1、原生Dom的事件流如上图所示：在JavaScript中，事件的触发实质上是要经过三个阶段:事件捕获、目标对象本身的事件处理和事件冒泡。  事件捕获 （由父级元素将事件一直传递到事件发生的元素）当某个事件触发时，文档根节点最先接受到事件，然后根据DOM树结构向具体绑定事件的元素传递。该阶段为父元素截获事件提供了机会。事件传递路径为：window —&gt; document —&gt; body">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React事件机制">
+<meta property="og:url" content="http://example.com/2021/01/19/React%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="Shirley.Hou的个人博客">
+<meta property="og:description" content="1、原生Dom的事件流如上图所示：在JavaScript中，事件的触发实质上是要经过三个阶段:事件捕获、目标对象本身的事件处理和事件冒泡。  事件捕获 （由父级元素将事件一直传递到事件发生的元素）当某个事件触发时，文档根节点最先接受到事件，然后根据DOM树结构向具体绑定事件的元素传递。该阶段为父元素截获事件提供了机会。事件传递路径为：window —&gt; document —&gt; body">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/image20.png">
+<meta property="og:image" content="http://example.com/images/image21.png">
+<meta property="og:image" content="http://example.com/images/image22.png">
+<meta property="og:image" content="http://example.com/images/image23.png">
+<meta property="og:image" content="http://example.com/images/image24.png">
+<meta property="article:published_time" content="2021-01-19T12:12:27.000Z">
+<meta property="article:modified_time" content="2025-04-15T14:27:20.695Z">
+<meta property="article:author" content="Shirley.Hou">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image20.png">
+  
+  
+  
+  <title>React事件机制 - Shirley.Hou的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Shirley.Hou的个人博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="React事件机制"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-01-19 20:12" pubdate>
+          January 19, 2021 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">React事件机制</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h4 id="1、原生Dom的事件流"><a href="#1、原生Dom的事件流" class="headerlink" title="1、原生Dom的事件流"></a>1、原生Dom的事件流</h4><p><img src="/images/image20.png" srcset="/img/loading.gif" lazyload alt="image.png"><br>如上图所示：<br>在JavaScript中，事件的触发实质上是要经过三个阶段:事件捕获、目标对象本身的事件处理和事件冒泡。</p>
+<ul>
+<li><p>事件捕获 （由父级元素将事件一直传递到事件发生的元素）<br>当某个事件触发时，文档根节点最先接受到事件，然后根据DOM树结构向具体绑定事件的元素传递。该阶段为父元素截获事件提供了机会。<br>事件传递路径为：<br>window —&gt; document —&gt; body —&gt; div—&gt; text</p>
+</li>
+<li><p>目标阶段<br>具体元素已经捕获事件后，执行目标事件本身的处理事件。</p>
+</li>
+<li><p>事件冒泡<br>根据DOM树结构由具体触发事件的元素向根节点传递。正因为事件在DOM的传递经历这样一个过程，从而为<code>事件委托</code>提供了可能。<br>事件传递路径：<br>text—&gt; div —&gt; body —&gt; document —&gt; window</p>
+</li>
+</ul>
+<h4 id="2、事件委托（事件代理）"><a href="#2、事件委托（事件代理）" class="headerlink" title="2、事件委托（事件代理）"></a>2、事件委托（事件代理）</h4><p>事件委托的实质就是将子元素事件的处理委托给父级元素处理。把事件监听器添加到它们的父元素上。事件监听器会分析从子元素冒泡上来的事件，找到它是哪个子元素的事件。</p>
+<p>举个栗子：如果我们有一个列表，列表之中有大量的列表项，我们需要在点击列表项的时候响应一个事件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lists&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list-item&quot;</span>&gt;</span>content1<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list-item&quot;</span>&gt;</span>content2<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list-item&quot;</span>&gt;</span>content3<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list-item&quot;</span>&gt;</span>content4<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-comment">//1. 事件代理</span></span><br><span class="language-javascript">        <span class="hljs-comment">// var listParentNode = document.querySelector(&#x27;.lists&#x27;);</span></span><br><span class="language-javascript">        <span class="hljs-comment">// listParentNode.addEventListener(&#x27;click&#x27;, function(e)&#123;</span></span><br><span class="language-javascript">        <span class="hljs-comment">//     console.log(e.target);</span></span><br><span class="language-javascript">        <span class="hljs-comment">// &#125;)</span></span><br><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-comment">//新增一个子元素</span></span><br><span class="language-javascript">        <span class="hljs-comment">// var newItem = document.createElement(&#x27;div&#x27;)</span></span><br><span class="language-javascript">        <span class="hljs-comment">// newItem.innerHTML = &#x27;newConent&#x27;;</span></span><br><span class="language-javascript">        <span class="hljs-comment">// newItem.setAttribute(&#x27;class&#x27;, &#x27;list-item&#x27;);</span></span><br><span class="language-javascript">        <span class="hljs-comment">// listParentNode.appendChild(newItem)</span></span><br><span class="language-javascript"></span><br><span class="language-javascript">       </span><br><span class="language-javascript">        <span class="hljs-comment">//2. 给每个列表项一一绑定一个函数</span></span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> nodeLists = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&#x27;.list-item&#x27;</span>);</span><br><span class="language-javascript">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; nodeLists.<span class="hljs-property">length</span>; i++) &#123;</span><br><span class="language-javascript">            nodeLists[i].<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;click&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)&#123;</span><br><span class="language-javascript">                <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">target</span>)</span><br><span class="language-javascript">            &#125;)</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        <span class="hljs-comment">//新增一个子元素</span></span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> listParentNode = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.lists&#x27;</span>);</span><br><span class="language-javascript">        <span class="hljs-keyword">var</span> newItem = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;div&#x27;</span>)</span><br><span class="language-javascript">        newItem.<span class="hljs-property">innerHTML</span> = <span class="hljs-string">&#x27;newConent&#x27;</span>;</span><br><span class="language-javascript">        newItem.<span class="hljs-title function_">setAttribute</span>(<span class="hljs-string">&#x27;class&#x27;</span>, <span class="hljs-string">&#x27;list-item&#x27;</span>);</span><br><span class="language-javascript">        listParentNode.<span class="hljs-title function_">appendChild</span>(newItem)</span><br><span class="language-javascript"></span><br><span class="language-javascript">&lt;/body&gt;</span><br></code></pre></td></tr></table></figure>
+<p><strong>事件委托优点</strong>： </p>
+<ol>
+<li><p>减少内存的消耗<br>上面两种方式， 如果给每个列表项一一都绑定一个函数，那对于内存消耗是非常大的，效率上需要消耗很多性能；所以比较好的方法是 点击事件绑定到他的父层，然后在执行事件的时候再去匹配判断目标元素（这样用事件代理的方式绑定事件，新添加的子元素仍然可以执行事件回调函数）。</p>
+</li>
+<li><p>动态绑定事件<br>比如上述的例子中列表项就几个，我们给每个列表项都绑定了事件；<br>在很多时候，我们需要通过 AJAX 或者用户操作动态的增加或者去除列表项元素，那么在每一次改变的时候都需要重新给新增的元素绑定事件，给即将删去的元素解绑事件；<br>如果用了事件委托就没有这种麻烦了，因为事件是绑定在父层的，和目标元素的增减是没有关系的，执行到目标元素是在真正响应执行事件函数的过程中去匹配的；<br>所以使用事件在动态绑定事件的情况下是可以减少很多重复工作的。</p>
+</li>
+</ol>
+<p>不适用的情况： 比如 focus、blur 之类的事件本身没有事件冒泡机制，所以无法委托； mousemove、mouseout这样的事件，虽然有事件冒泡，但是只能不断通过位置去计算定位，对性能消耗高，因此也是不适合于事件委托。</p>
+<h4 id="3-React事件机制"><a href="#3-React事件机制" class="headerlink" title="3. React事件机制"></a>3. React事件机制</h4><p><img src="/images/image21.png" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>在 <a href="https://link.zhihu.com/?target=https://reactjs.org/docs/events.html">React事件介绍</a> 中介绍了合成事件对象以及为什么提供合成事件对象，主要原因是因为 React 想实现一个全浏览器的框架， 为了实现这种目标就需要提供全浏览器一致性的事件系统，以此抹平不同浏览器的差异。</p>
+<p>合成事件对象很有意思，一开始听名字会觉得很奇怪，看到英文名更奇怪 <code>SyntheticEvent</code>， 实际上合成事件的意思就是使用原生事件合成一个 React 事件， 例如使用原生<code>click</code>事件合成了<code>onClick</code>事件，使用原生<code>mouseout</code>事件合成了<code>onMouseLeave</code>事件，原生事件和合成事件类型大部分都是一一对应，只有涉及到兼容性问题时我们才需要使用不对应的事件合成。</p>
+<p>合成事件是浏览器的原生事件的跨浏览器包装器。除兼容所有浏览器外，它还拥有和浏览器原生事件相同的接口，包括 <code>stopPropagation()</code> 和 <code>preventDefault()</code>。</p>
+<p>当我们在组件上设置事件处理器时，React并不会在该DOM元素上直接绑定事件处理器. React内部自定义了一套事件系统，在这个系统上统一进行事件订阅和分发。</p>
+<p>具体来讲，React利用事件委托机制在Document上统一监听DOM事件，再根据触发的target将事件分发到具体的组件实例。另外上面e是一个合成事件对象(SyntheticEvent), 而不是原始的DOM事件对象。</p>
+<p>React事件系统实现可以分为两个阶段：事件注册、事件触发</p>
+<ul>
+<li>事件注册<br><strong>React 的事件注册过程主要做了两件事：document 上注册、存储事件回调</strong>。<br><strong>document 上注册</strong><br>React在组件加载(mount)和更新(update)时, 根据传入组件内的声明的事件类型的属性（onClick、onChange 等），在 document 上注册事件（<code>document.addEventListener(&#39;click&#39;, dispatchEvent)</code>) 并指定统一的回调函数 <code>dispatchEvent</code>(不处理具体的事件，仅对事件进行分发)<br><strong>存储事件回调</strong><br>React 为了在触发事件时可以查找到对应的回调去执行，会把组件内的所有事件统一地存放到一个对象中（listenerBank）。而存储方式如上图，首先会根据事件类型分类存储，例如 click 事件相关的统一存储在一个对象中，回调函数的存储采用键值对（key&#x2F;value）的方式存储在对象中，key 是组件的唯一标识 (_rootNodeID)，value 对应的就是事件的回调函数。例如</li>
+</ul>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol">    click:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol">        key1:</span> fn, <span class="hljs-comment">//key 是组件的唯一标识 (_rootNodeID)</span><br><span class="hljs-symbol">        key2:</span> fn<br>    <span class="hljs-punctuation">&#125;</span>,<br><span class="hljs-symbol">    change:</span> <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol">        key3:</span> fn,<br><span class="hljs-symbol">        key4:</span> fn<br>    <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<p>ReactBrowserEventEmitter作为事件注册入口，担负着事件注册和事件触发。注册事件的回调函数由EventPluginHub来统一管理，根据事件的类型(type)和组件标识(_rootNodeID)为key唯一标识事件并进行存储。</p>
+<ul>
+<li>事件触发<br><img src="/images/image22.png" srcset="/img/loading.gif" lazyload alt="事件触发流程.png"></li>
+</ul>
+<p>其大致流程如下：</p>
+<ol>
+<li>触发事件，开始 DOM 事件流，先后经过三个阶段：事件捕获阶段、处于目标阶段和事件冒泡阶段</li>
+<li>当事件冒泡到 document 时，触发统一的事件分发函数 ReactEventListener.dispatchEvent</li>
+<li>dispatchEvent根据原生事件对象（nativeEvent）找到当前节点（即事件触发节点）对应的 ReactDOMComponent 对象</li>
+<li>事件的合成<br> (1) 根据当前事件类型生成对应的合成对象<br> (2) 封装原生事件对象和冒泡机制<br> (3) 查找当前元素以及它所有父级<br> (4)在 listenerBank 中查找事件回调函数并合成到 events 中</li>
+<li>批量执行合成事件（events）内的回调函数， </li>
+<li>如果没有阻止冒泡，会将继续进行 DOM 事件流的冒泡（从 document 到 window），否则结束事件触发</li>
+</ol>
+<hr>
+<p>简单点的解释为：<br>React不会将事件处理函数直接绑定到真实的节点上，而是把所有的事件绑定到结构的最外层，使用一个统一的事件监听器。这个监听器维持了一个映射，保存所有组件内部的事件监听和处理函数。当事件发生时，首先被这个统一的事件监听器处理，然后在映射里找到真正的事件处理函数并调用。</p>
+<p>需要注意的是</p>
+<ol>
+<li>React合成事件的冒泡并不是真的冒泡，而是节点的遍历。 </li>
+<li>并不是所有事件都会委托到document上，前面提到几乎所有的事件代理(delegate)到document，几乎说明存在例外的情况。例如对于audio、video标签，存在一些媒体事件(例如onplay、onpause)，而这些事件是document不具有的，那么只能在这些标签上进行事件绑定，绑定一个入口分发函数(dispatchEvent)。</li>
+</ol>
+<h4 id="4-React事件和原生事件有什么区别"><a href="#4-React事件和原生事件有什么区别" class="headerlink" title="4.  React事件和原生事件有什么区别"></a>4.  React事件和原生事件有什么区别</h4><p>关于合成事件<br>合成事件官方文档：<a target="_blank" rel="noopener" href="https://react.html.cn/docs/events.html">https://react.html.cn/docs/events.html</a></p>
+<p>合成事件作用</p>
+<ol>
+<li>对原生事件封装<br>在事件回调方法,方法中的参数 e，其实不是原生事件对象e而是react包装过的对象，同时原生事件对象被放在了属性 e.nativeEvent内。<br>官网中介绍到了 SyntheticEvent是react合成事件的基类，定义了合成事件的基础公共属性和方法。react会根据当前的事件类型来使用不同的合成事件对象，比如鼠标单机事件 - SyntheticMouseEvent，焦点事件-SyntheticFocusEvent等，但是都是继承自SyntheticEvent。</li>
+<li>对原生事件的升级和改造<br>对于有些dom元素事件，我们进行事件绑定之后，react并不是只处理你声明的事件类型，还会额外的增加一些其他的事件，帮助我们提升交互的体验。<br>最典型的例子就是input的<code>onChange</code>事件。<br><img src="/images/image23.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
+<li>浏览器事件的兼容处理<br>react在给document注册事件的时候也是对兼容性做了处理。下面这个代码就是给document注册事件，内部其实也是做了对 ie浏览器的兼容做了处理。<br><img src="/images/image24.png" srcset="/img/loading.gif" lazyload alt="image.png"></li>
+</ol>
+<p> React事件和原生事件主要区别有:</p>
+<ol>
+<li>React 组件上声明的事件没有绑定在 React 组件对应的原生 DOM 节点上。</li>
+<li>React 利用事件委托机制，将几乎所有事件的触发代理（delegate）在 document 节点上，事件对象(event)是合成对象(SyntheticEvent)，不是原生事件对象，但通过 nativeEvent 属性访问原生事件对象。</li>
+<li>由于 React 的事件委托机制，React 组件对应的原生 DOM 节点上的事件触发时机总是在 React 组件上的事件之前。</li>
+<li>原生事件阻止冒泡肯定会阻止合成事件的触发， 合成事件的阻止冒泡不会影响原生事件, 两者最好不要混合使用，避免出现一些奇怪的问题。</li>
+</ol>
+<p>合成事件优点： </p>
+<ol>
+<li>减少内存消耗，提升性能，不需要注册那么多的事件了，一种事件类型只在 document 上注册一次</li>
+<li>统一规范，解决兼容问题，简化事件逻辑，事件处理程序接收到的是SyntheticEvent的实例。SyntheticEvent完全符合W3C的标准，因此在事件层次上具有浏览器兼容性。</li>
+<li>React打算干预事件的分发。v16引入Fiber架构，React为了优化用户的交互体验，会干预事件的分发。不同类型的事件有不同的优先级，比如高优先级的事件可以中断渲染，让用户代码可以及时响应用户交互</li>
+</ol>
+<p>站在巨人的肩膀上(参考资料)<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/165089379">dom事件</a><br><a target="_blank" rel="noopener" href="https://bobi.ink/2019/07/29/react-event/">React事件机制和未来</a>  这个文章写得好！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/React/" class="category-chain-item">React</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>React事件机制</div>
+      <div>http://example.com/2021/01/19/React事件机制/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Shirley.Hou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 19, 2021</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="面向对象编程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">面向对象编程</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/15/CSS3-transformMatri/" title="CSS3 transform Matrix">
+                        <span class="hidden-mobile">CSS3 transform Matrix</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

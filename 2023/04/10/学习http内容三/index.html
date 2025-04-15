@@ -1,0 +1,721 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Shirley.Hou">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="7. 首部字段上面的HTTP报文介绍了首部字段。首部字段同时存在于请求和响应报文内，并涵盖 HTTP 报文相关的内容信息。使用首部字段是为了给客服端和服务器端提供报文主体大小、所使用的语言、认证信息等内容。  首部字段结构由首部字段名和字段值，中间用冒号分割。 例如 Content-Type：text&#x2F;html注 :  HTTP 报文首部中出现了两个或以上具有相同首部字段名的首部字段时，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络知识学习之HTTP协议（三)">
+<meta property="og:url" content="http://example.com/2023/04/10/%E5%AD%A6%E4%B9%A0http%E5%86%85%E5%AE%B9%E4%B8%89/index.html">
+<meta property="og:site_name" content="Shirley.Hou的个人博客">
+<meta property="og:description" content="7. 首部字段上面的HTTP报文介绍了首部字段。首部字段同时存在于请求和响应报文内，并涵盖 HTTP 报文相关的内容信息。使用首部字段是为了给客服端和服务器端提供报文主体大小、所使用的语言、认证信息等内容。  首部字段结构由首部字段名和字段值，中间用冒号分割。 例如 Content-Type：text&#x2F;html注 :  HTTP 报文首部中出现了两个或以上具有相同首部字段名的首部字段时，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/image16.png">
+<meta property="og:image" content="http://example.com/images/image17.png">
+<meta property="og:image" content="http://example.com/images/image18.png">
+<meta property="og:image" content="http://example.com/images/image19.png">
+<meta property="article:published_time" content="2023-04-10T13:53:05.000Z">
+<meta property="article:modified_time" content="2025-04-15T14:28:41.624Z">
+<meta property="article:author" content="Shirley.Hou">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image16.png">
+  
+  
+  
+  <title>网络知识学习之HTTP协议（三) - Shirley.Hou的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Shirley.Hou的个人博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="网络知识学习之HTTP协议（三)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-10 21:53" pubdate>
+          April 10, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">网络知识学习之HTTP协议（三)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="7-首部字段"><a href="#7-首部字段" class="headerlink" title="7. 首部字段"></a>7. 首部字段</h3><p>上面的HTTP报文介绍了首部字段。首部字段同时存在于请求和响应报文内，并涵盖 HTTP 报文相关的内容信息。使用首部字段是为了给客服端和服务器端提供报文主体大小、所使用的语言、认证信息等内容。</p>
+<ul>
+<li><p><strong>首部字段结构</strong><br>由首部字段名和字段值，中间用冒号分割。 例如 Content-Type：text&#x2F;html<br><strong>注</strong> :  HTTP 报文首部中出现了两个或以上具有相同首部字段名的首部字段时，这种情况在规范内尚未明确，根据浏览器内部处理逻辑的不同，优先处理的顺序可能不同，结果可能并不一致。</p>
+</li>
+<li><p><strong>首部字段类型</strong><br>HTTP 首部字段根据实际用途被分为以下 4 种类型：<br><strong>1. 通用首部字段</strong>（General Header Fields）<br>请求报文和响应报文两方都会使用的首部。<br><strong>2. 请求首部字段</strong>（Request Header Fields）<br>从客户端向服务器端发送请求报文时使用的首部。补充了请求的附加内容、客户端信息、响应内容相关优先级等信息。<br><strong>3. 响应首部字段</strong>（Response Header Fields）<br>从服务器端向客户端返回响应报文时使用的首部。补充了响应的附加内容，也会要求客户端附加额外的内容信息。<br><strong>4. 实体首部字段</strong>（Entity Header Fields）<br>针对请求报文和响应报文的实体部分使用的首部。补充了资源内容更新时间等与实体有关的信息。</p>
+</li>
+<li><p><strong>通用首部字段</strong> (HTTP&#x2F;1.1)<br>Cache-Control	  控制缓存的行为<br>Connection	  逐挑首部、连接的管理<br>Date	创建报文的日期时间<br>Pragma	报文指令<br>Trailer	报文末端的首部一览<br>Transfer-Encoding	指定报文主体的传输编码方式<br>Upgrade	升级为其他协议<br>Via	代理服务器的相关信息<br>Warning	错误通知</p>
+</li>
+<li><p><strong>请求首部字段</strong><br>Accept                         用户代理可处理的媒体类型<br>Accept-Charset            优先的字符集<br>Accept-Encoding         优先的内容编码<br>Accept-Language        优先的语言（自然语言）<br>Authorization               Web认证信息<br>Expect                          期待服务器的特定行为<br>From                             用户的电子邮箱地址<br>Host                              请求资源所在服务器<br>If-Match                        比较实体标记（ETag）<br>If-Modified-Since          比较资源的更新时间<br>If-None-Match              比较实体标记（与 If-Match 相反）<br>If-Range                        资源未更新时发送实体 Byte 的范围请求<br>If-Unmodified-Since     比较资源的更新时间（与If-Modified-Since相反）<br>Max-Forwards               最大传输逐跳数<br>Proxy-Authorization     代理服务器要求客户端的认证信息<br>Range                           实体的字节范围请求<br>Referer                          对请求中 URI 的原始获取方<br>TE                                  传输编码的优先级</p>
+</li>
+</ul>
+<p>User-Agent                   HTTP 客户端程序的信息</p>
+<ul>
+<li><strong>响应首部字段</strong><br>Accept-Ranges             是否接受字节范围请求<br>Age                               推算资源创建经过时间</li>
+</ul>
+<p>ETag                              资源的匹配信息<br>Location                        令客户端重定向至指定URI<br>Proxy-Authenticate      代理服务器对客户端的认证信息<br>Retry-After                   对再次发起请求的时机要求<br>Server HTTP                  服务器的安装信息<br>Vary                              代理服务器缓存的管理信息<br>WWW-Authenticate     服务器对客户端的认证信息</p>
+<ul>
+<li><strong>实体首部字段</strong><br>Allow                            资源可支持的HTTP方法<br>Content-Encoding       实体主体适用的编码方式<br>Content-Language      实体主体的自然语言<br>Content-Length           实体主体的大小（单位：字节）<br>Content-Location        替代对应资源的URI<br>Content-MD5              实体主体的报文摘要<br>Content-Range            实体主体的位置范围<br>Content-Type              实体主体的媒体类型<br>Expires                         实体主体过期的日期时间<br>Last-Modified              资源的最后修改日期时间</li>
+</ul>
+<h5 id="7-1-Cache-Control"><a href="#7-1-Cache-Control" class="headerlink" title="7.1 Cache-Control"></a>7.1 Cache-Control</h5><p>通过指定首部字段 Cache-Control 的指令，就能操作缓存的工作机制。指令的参数是可选的，多个指令之间通过“,”分隔。比如： Cache-Control: private, max-age&#x3D;0, no-cache​。</p>
+<ul>
+<li>缓存请求指令<br><img src="/images/image16.png" srcset="/img/loading.gif" lazyload alt="缓存请求指令.png"></li>
+<li>缓存响应指令<br><img src="/images/image17.png" srcset="/img/loading.gif" lazyload alt="缓存响应指令.png"></li>
+</ul>
+<p>Pragma和Expires也与缓存相关，Pragma是旧产物，已经逐步抛弃，有些网站为了向下兼容还保留了这两个字段。优先级从高到低是:Pragma -&gt; Cache-Control -&gt; Expires</p>
+<p>Cache-Control除了在响应中使用，在请求中也可以使用。我们用开发者工具来模拟下请求时带上Cache-Control：勾选Disable cache，刷新页面，可以看到Request Headers中有个字段Cache-Control: no-cache。</p>
+<h5 id="7-2-Connection"><a href="#7-2-Connection" class="headerlink" title="7.2 Connection"></a>7.2 Connection</h5><p>Connection 首部字段具备以下两个作用：</p>
+<ol>
+<li>控制不再转发的首部字段<br>Connection: Upgrade<br>在客户端发送请求和服务器返回响应中，使用 Connection 首部字段，可控制不再转发给代理的首部字段，即删除后再转发（即Hop-by-hop首部）。<br><img src="/images/image18.png" srcset="/img/loading.gif" lazyload alt="747969-20170217214935269-1562584482.png"></li>
+<li>管理持久连接</li>
+</ol>
+<ul>
+<li>Connection: close<br>HTTP&#x2F;1.1 版本的默认连接都是持久连接。当服务器端想明确断开连接时，则指定 Connection 首部字段的值为 close。</li>
+<li>Connection: Keep-Alive<br>HTTP&#x2F;1.1 之前的 HTTP 版本的默认连接都是非持久连接。为此，如果想在旧版本的 HTTP 协议上维持持续连接，则需要指定 Connection 首部字段的值为 Keep-Alive。</li>
+</ul>
+<h5 id="7-3-Date"><a href="#7-3-Date" class="headerlink" title="7.3 Date"></a>7.3 Date</h5><p>Date 表明创建 HTTP 报文的日期和时间</p>
+<h5 id="7-4-Accept"><a href="#7-4-Accept" class="headerlink" title="7.4  Accept"></a>7.4  Accept</h5><p><code>Accept: text/html, application/xhtml+xml, application/xml; q=0.5</code></p>
+<ul>
+<li>Accept 首部字段可通知服务器，用户代理能够处理的媒体类型及媒体类型的相对优先级。可使用 type&#x2F;subtype 这种形式，一次指定多种媒体类型。</li>
+<li>若想要给显示的媒体类型增加优先级，则使用 q&#x3D;[数值] 来表示权重值，用分号（;）进行分隔。权重值的范围 0~1（可精确到小数点后三位），且 1 为最大值。不指定权重值时，默认为 1。当服务器提供多种内容时，将会首先返回权重值最高的媒体类型。</li>
+</ul>
+<h5 id="7-5-Accept-Encoding"><a href="#7-5-Accept-Encoding" class="headerlink" title="7.5  Accept-Encoding"></a>7.5  Accept-Encoding</h5><p><code>Accept-Encoding: gzip, deflate</code><br>Accept-Encoding 首部字段用来告知服务器用户代理支持的内容编码及内容编码的优先顺序，并可一次性指定多种内容编码。同样使用 q&#x3D;[数值] 来表示相对优先级。也可使用星号（*）作为通配符，指定任意的编码格式。</p>
+<h5 id="7-6-Accept-Language"><a href="#7-6-Accept-Language" class="headerlink" title="7.6  Accept-Language"></a>7.6  Accept-Language</h5><p>Accept-Lanuage: zh-cn,zh;q&#x3D;0.7,en&#x3D;us,en;q&#x3D;0.3<br>告知服务器用户代理能够处理的自然语言集（指中文或英文等），以及自然语言集的相对优先级，可一次性指定多种自然语言集。同样使用 q&#x3D;[数值] 来表示相对优先级。</p>
+<h5 id="7-7-Host"><a href="#7-7-Host" class="headerlink" title="7.7 Host"></a>7.7 Host</h5><p><code>Host: localhost:8001​</code><br>首部字段 Host 会告知服务器，请求的资源所处的互联网主机名和端口号。Host 首部字段在 HTTP&#x2F;1.1 规范内是唯一一个必须被包含在请求内的首部字段。<br>首部字段 Host 和以单台服务器分配多个域名的虚拟主机的工作机制有很密切的关联，这是首部字段 Host 必须存在的意义</p>
+<h5 id="7-8-User-AgentUser-Agent"><a href="#7-8-User-AgentUser-Agent" class="headerlink" title="7.8 User-AgentUser-Agent"></a>7.8 User-AgentUser-Agent</h5><p><code>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36</code></p>
+<ul>
+<li>首部字段 User-Agent 会将创建请求的浏览器和用户代理名称等信息传达给服务器。</li>
+<li>由网络爬虫发起请求时，有可能会在字段内添加爬虫作者的电子邮件地址。此外，如果请求经过代理，那么中间也很可能被添加上代理服务器的名称。</li>
+</ul>
+<h5 id="7-9-Allow"><a href="#7-9-Allow" class="headerlink" title="7.9 Allow"></a>7.9 Allow</h5><p><code>Allow: GET, HEAD</code></p>
+<ul>
+<li>首部字段 Allow 用于通知客户端能够支持 Request-URI 指定资源的所有 HTTP 方法。</li>
+<li>当服务器接收到不支持的 HTTP 方法时，会以状态码 405 Method Not Allowed 作为响应返回。与此同时，还会把所有能支持的 HTTP 方法写入首部字段 Allow 后返回。</li>
+</ul>
+<h5 id="7-10-Content-Encoding"><a href="#7-10-Content-Encoding" class="headerlink" title="7.10 Content-Encoding"></a>7.10 Content-Encoding</h5><p><code>Content-Encoding: gzip</code></p>
+<ul>
+<li>首部字段 Content-Encoding 会告知客户端服务器对实体的主体部分选用的内容编码方式。内容编码是指在不丢失实体信息的前提下所进行的压缩。</li>
+<li>主要采用这 4 种内容编码的方式（gzip、compress、deflate、identity）。</li>
+</ul>
+<h5 id="7-11-Content-Language"><a href="#7-11-Content-Language" class="headerlink" title="7.11 Content-Language"></a>7.11 Content-Language</h5><p><code>Content-Language: zh-CN</code><br>首部字段 Content-Language 会告知客户端，实体主体使用的自然语言（指中文或英文等语言）。</p>
+<h5 id="7-12-Content-Type"><a href="#7-12-Content-Type" class="headerlink" title="7.12 Content-Type"></a>7.12 Content-Type</h5><p><code>Content-Type: text/html; charset=UTF-8</code><br>首部字段 Content-Type 说明了实体主体内对象的媒体类型。和首部字段 Accept 一样，字段值用 type&#x2F;subtype 形式赋值。参数 charset 使用 iso-8859-1 或 euc-jp 等字符集进行赋值。</p>
+<h5 id="7-13-Expires"><a href="#7-13-Expires" class="headerlink" title="7.13  Expires"></a>7.13  Expires</h5><p><code>Expires: Mon, 10 Jul 2017 15:50:06 GMT</code></p>
+<ul>
+<li>首部字段 Expires 会将资源失效的日期告知客户端。</li>
+<li>缓存服务器在接收到含有首部字段 Expires 的响应后，会以缓存来应答请求，在 Expires 字段值指定的时间之前，响应的副本会一直被保存。当超过指定的时间后，缓存服务器在请求发送过来时，会转向源服务器请求资源。</li>
+<li>源服务器不希望缓存服务器对资源缓存时，最好在 Expires 字段内写入与首部字段 Date 相同的时间值。</li>
+</ul>
+<p>#####7.14 Cookie<br> 服务器在响应头中用Set-Cookie头将Cookie的内容回送给客户端，客户端在新的请求中将相同的内容携带在cookie头中发送给服务器，从而实现会话的保持。</p>
+<ul>
+<li>响应首部字段<br><code>setCookie: name=aaa; expires=Mon, 10 Jul 2017 15:50:06 GMT; path=/</code><br>属性	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说明</li>
+</ul>
+<p>NAME&#x3D;VALUE&nbsp;&nbsp;&nbsp;&nbsp;赋予 Cookie 的名称和其值（必需项）<br>expires&#x3D;DATE&nbsp;&nbsp;&nbsp;&nbsp;Cookie 的有效期（若不明确指定则默认为浏览器关闭前为止）<br>path&#x3D;PATH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将服务器上的文件目录作为Cookie的适用对象（若不指定则默认为文档所在的文件目录）<br>domain&#x3D;域名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为 Cookie 适用对象的域名 （若不指定则默认为创建 Cookie的服务器的域名）<br>Secure&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;仅在 HTTPS 安全通信时才会发送 Cookie<br>HttpOnly&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加以限制，使 Cookie 不能被 JavaScript 脚本访问</p>
+<ul>
+<li>请求首部字段 Cookie<br>Cookie: status&#x3D;enable</li>
+</ul>
+<p>首部字段 Cookie 会告知服务器，当客户端想获得 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie。接收到多个 Cookie 时，同样可以以多个 Cookie 形式发送。</p>
+<h5 id="7-15-CSP-content-security-policy-内容安全策略"><a href="#7-15-CSP-content-security-policy-内容安全策略" class="headerlink" title="7.15  CSP(content-security-policy)内容安全策略"></a>7.15  CSP(content-security-policy)内容安全策略</h5><p>实质是建立报名单制度，明确的告诉客户端，哪些外部资源可以加载和执行。所以使用 CSP 来防止 XSS攻击(跨域脚本攻击)。</p>
+<p><code>Content-Security-Policy： &#39;default-src \&#39;self\&#39; </code>表示只能加载同域下资源。<br><code> Content-Security-Policy： &#39;default-src \&#39;self\&#39;; report-uri /report&#39;</code> 表示只能加载同域下资源, 且会发送一个违例报告。默认情况下，违规报告并不会发送。为启用发送违规报告，你需要指定 report-uri策略指令，并提供至少一个URI地址去递交报告。<br>如果我只想收集报告，但是不真正的去限制请求，那怎么办？除了Content-Security-Policy，还有一个<code>Content-Security-Policy-Report-Only</code>字段，表示不执行限选项，只是记录违反限制的行为。将头部改为这个即可。<br><strong>注</strong>： <code>default-src</code>设置的是全局，如果我只想限制js的请求，可以将default-src改为script-src, 限制图片请求可用<code>img-src</code></p>
+<p>使用meta标签达到一样的效果。<br><code>&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#39;self&#39;&quot;&gt;</code></p>
+<p>详细用法可以参考<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/09/csp.html">Content Security Policy</a></p>
+<p>#####7.16  Sec-Fetch-*<br>简单来说，就是网络请求的元数据描述，服务端根据这些补充数据进行细粒度的控制响应。浏览器自动带上的请求头，都是Forbidden header，也就是不能被篡改的。<br><code>Sec-Fetch-Dest</code>: 期望需要什么样的资源,比如 script。<br><code>Sec-Fetch-Mode</code>： 表明了一个请求的模式，比如是否跨域。<br><code>Sec-Fetch-Site</code>: 请求发起者的来源与目标资源来源之间的关系，比如跨域就为 <code>cross-site</code>。</p>
+<h5 id="7-17-其它首部字段"><a href="#7-17-其它首部字段" class="headerlink" title="7.17 其它首部字段"></a>7.17 其它首部字段</h5><p>HTTP 首部字段是可以自行扩展的。所以在 Web 服务器和浏览器的应用上，会出现各种非标准的首部字段。<br>例如:  <code>X-Frame-Options</code>: 用于控制网站内容在其他 Web 网站的 iframe 标签内的显示问题。</p>
+<h3 id="8-TCP长连接"><a href="#8-TCP长连接" class="headerlink" title="8. TCP长连接"></a>8. TCP长连接</h3><ul>
+<li><p>短连接的操作步骤是：<br>建立连接——数据传输——关闭连接…建立连接——数据传输——关闭连接</p>
+</li>
+<li><p>长连接的操作步骤是：<br>建立连接——数据传输…（保持连接）…数据传输——关闭连接</p>
+</li>
+<li><p>持久的连接节省通信<br>每次进行HTTP请求的时候，都要先建立TCP连接，然后结束之后再断开TCP连接。这样如果在同一份HTML文档中有大量的图片等资源，就会建立和断开多次TCP连接，造成资源的浪费。HTTP1.1和一部分HTTP1.0想出了持久连接。持久连接的特点：只要任意一端没有明确断开连接，就保持TCP的链接状态。这样不会因为频繁的建立和断开TCP连接造成额外的开销，减轻了服务器的负载。同时减少了HTTP请求和响应的时间。<br><img src="/images/image19.png" srcset="/img/loading.gif" lazyload alt="持久连接.png"></p>
+</li>
+<li><p>TCP connection<br> Connection: keep-alive&#x2F;close(开启&#x2F;关闭)<br>HTTP2只需要建立一个TCP长连接（同域下）</p>
+</li>
+</ul>
+<p>那是不是只需要建立一个TCP连接，然后发送多个HTTP请求就可以了？ 不行。<br>HTTP&#x2F;1.1 存在一个问题：单个 TCP 连接在同一时刻只能处理一个请求。如果一个网页上有多个资源需要请求，肯定不能只开一个TCP连接，然后按请求顺序下载，那样用户肯定等的很难受。<br>所以Chrome最多允许对同一个 Host 建立六个 TCP 连接。（不同的浏览器允许的连接数不同。就解释了之前我们所了解到的的浏览器请求的最大并发量是6个(以chrome为例)。</p>
+<p>相关文章<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c68fb8f75f38">CORS</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e1e2920dac95">JSONP</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6e9e4156ece3">HTTP</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/76302817">你知道一个TCP连接上能发起多少个HTTP请求吗？</a></p>
+<p><em><strong>http基本知识学习完啦…</strong></em></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>网络知识学习之HTTP协议（三)</div>
+      <div>http://example.com/2023/04/10/学习http内容三/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Shirley.Hou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 10, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/25/%E5%AD%A6%E4%B9%A0http%E5%86%85%E5%AE%B9%E4%BA%8C/" title="网络知识学习之HTTP协议(二)">
+                        <span class="hidden-mobile">网络知识学习之HTTP协议(二)</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

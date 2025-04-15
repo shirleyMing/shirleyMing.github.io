@@ -1,0 +1,680 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Shirley.Hou">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="4. HTTP工作过程一次HTTP操作称为一个事务，其工作整个过程如下：     1 ) 地址解析如用客户端浏览器请求这个页面：http:&#x2F;&#x2F;localhost.com:8080&#x2F;index.html从中分解出协议名、主机名、端口、对象路径等部分，对于我们的这个地址，解析得到的结果如下：     协议名：http     主机名：localhost.com     端口：8080     对象路径">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络知识学习之HTTP协议(二)">
+<meta property="og:url" content="http://example.com/2023/03/25/%E5%AD%A6%E4%B9%A0http%E5%86%85%E5%AE%B9%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Shirley.Hou的个人博客">
+<meta property="og:description" content="4. HTTP工作过程一次HTTP操作称为一个事务，其工作整个过程如下：     1 ) 地址解析如用客户端浏览器请求这个页面：http:&#x2F;&#x2F;localhost.com:8080&#x2F;index.html从中分解出协议名、主机名、端口、对象路径等部分，对于我们的这个地址，解析得到的结果如下：     协议名：http     主机名：localhost.com     端口：8080     对象路径">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-25T13:47:34.000Z">
+<meta property="article:modified_time" content="2025-04-15T14:32:37.711Z">
+<meta property="article:author" content="Shirley.Hou">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>网络知识学习之HTTP协议(二) - Shirley.Hou的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Shirley.Hou的个人博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="网络知识学习之HTTP协议(二)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-25 21:47" pubdate>
+          March 25, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">网络知识学习之HTTP协议(二)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="4-HTTP工作过程"><a href="#4-HTTP工作过程" class="headerlink" title="4. HTTP工作过程"></a>4. HTTP工作过程</h3><p>一次HTTP操作称为一个事务，其工作整个过程如下：<br>     1 ) 地址解析如用客户端浏览器请求这个页面：<code>http://localhost.com:8080/index.html</code><br>从中分解出协议名、主机名、端口、对象路径等部分，对于我们的这个地址，解析得到的结果如下：<br>     协议名：http<br>     主机名：localhost.com<br>     端口：8080<br>     对象路径：&#x2F;index.htm<br> 在这一步，需要域名系统DNS解析域名localhost.com,得主机的IP地址。<br>2）封装HTTP请求数据包<br>把以上部分结合本机自己的信息，封装成一个HTTP请求数据包<br>3）封装成TCP包，建立TCP连接（TCP的三次握手）<br>在HTTP工作开始之前，客户机（Web浏览器）首先要通过网络与服务器建立连接，该连接是通过TCP来完成的，该协议与IP协议共同构建Internet，即著名的TCP&#x2F;IP协议族，因此Internet又被称作是TCP&#x2F;IP网络。HTTP是比TCP更高层次的应用层协议，根据规则，只有低层协议建立之后才能进行更高层协议的连接，因此，首先要建立TCP连接，一般TCP连接的端口号是80。这里是8080端口<br>4）客户机发送请求命令<br>建立连接后，客户机发送一个请求给服务器，请求方式的格式为：统一资源标识符（URI：Uniform Resource Identifier）、协议版本号，后边是MIME信息包括请求修饰符、客户机信息和可能的内容。<br>5）服务器响应<br>服务器接到请求后，给予相应的响应信息，其格式为一个状态行，包括信息的协议版本号、一个成功或错误的代码，后边是MIME信息包括服务器信息、实体信息和可能的内容。<br>实体消息是服务器向浏览器发送头信息后，它会发送一个空白行来表示头信息的发送到此结束，接着，它就以Content-Type应答头信息所描述的格式发送用户所请求的实际数据<br>6）服务器关闭TCP连接<br>一般情况下，一旦Web服务器向浏览器发送了请求数据，它就要关闭TCP连接，然后如果浏览器或者服务器在其头信息加入了这行代码<code>Connection:keep-alive</code><br>TCP连接在发送后将仍然保持打开状态，于是，浏览器可以继续通过相同的连接发送请求。保持连接节省了为每个请求建立新连接所需的时间，还节约了网络带宽。</p>
+<p>经典面试题【从输入URL到页面加载发生了什么？】</p>
+<ul>
+<li><strong>DNS解析</strong>：如果地址包含域名通过DNS解析获取服务器对应的ip地址，如果输入的URL不包含域名则不经过这一步。</li>
+<li><strong>TCP连接</strong> : 经过DNS解析后获取到了服务器的IP地址，在获取到IP地址后，便会开始建立一次连接(三次握手)。</li>
+<li><strong>发送HTTP请求</strong>:  在确认与服务器建立连接后，便会发送一个HTTP请求。</li>
+<li><strong>服务器处理请求并返回HTTP报文</strong>: 服务器在收到浏览器发送的HTTP请求之后，会将收到的HTTP报文封装成HTTP的Request对象，并通过不同的Web服务器进行处理，处理完的结果以HTTP的Response对象返回，主要包括状态码，响应头，响应报文三个部分。</li>
+<li><strong>浏览器解析渲染页面</strong></li>
+<li><strong>连接结束</strong>: 在页面元素传输完成后，会选择关闭连接(TCP四次挥手)。</li>
+</ul>
+<h3 id="5-http报文"><a href="#5-http报文" class="headerlink" title="5. http报文"></a>5. http报文</h3><p><strong>报文(message)</strong><br>报文是网络中交换与传输的数据单元，也是网络传输的单元。报文包含了将要发送的完整的数据信息，其长短不需一致。报文在传输过程中会不断地封装成分组、包、帧来传输，封装的方式就是添加一些控制信息组成的首部，那些就是报文头。</p>
+<p>http有两种报文</p>
+<ul>
+<li>请求报文： 请求行、首部字段、报文主体（请求正文）</li>
+<li>响应报文：状态行、首部字段、报文主体（响应正文）</li>
+</ul>
+<p><strong>请求行</strong>（HTTP请求报文的第一行）<br>请求行由方法字段、URL字段和HTTP协议版本字段。其中，方法字段严格区分大小写，当前HTTP协议中的方法都是大写。</p>
+<ul>
+<li>方法字段如下介绍如下（请求方法用来定义队对资源的操作）<br>1）GET:请求获取Request-URI(URI:通用资源标识符,URL是其子集，URI注重的是标识，而URL强调的是位置，可以将URL看成原始的URI),所标识的资源<br>2）POST：在Request-URI所标识的资源后附加新的数据；支持HTML表单提交，表单中有用户添入的数据，这些数据会发送到服务器端，由服务器存储至某位置（例如发送处理程序）<br>3）HEAD:请求Request-URI所标识的资源响应消息报头，HEAD方法可以在响应时不返回消息体。<br>4）PUT：与GET相反，请求服务器存储一个资源，并用Request-URI做为其标识；例如发布系统。<br>5）DELETE：请求删除URL指向的资源<br>6）OPTIONS：请求查询服务器的性能，或者查询与资源相关的选项<br>7）TRACE：跟踪请求要经过的防火墙、代理或网关等，主要用于测试或诊断<br>8）CONNECT保留将来使用</li>
+</ul>
+<p><strong>状态行</strong> HTTP响应报文的第一行<br>状态行包括三个字段：协议版本、状态码与原因短语</p>
+<ul>
+<li>状态码<br>状态码由三位数字组成，第一个数字定义了响应的类别， 且由5种取值：<br> 1）1xx: 指示消息–表示已接收，继续处理<br> 2）2xx: 成功–表示请求已被成功接收、理解、接收<br> 3）3xx: 重定向–要完成请求必须进行更进一步的操作<br> 4）4xx: 客户端错误–请求有语法错误或请求无法实现<br> 5）5xx：服务器端错误–服务器端未能实现合法的请求</li>
+</ul>
+<h3 id="6-跨域"><a href="#6-跨域" class="headerlink" title="6. 跨域"></a>6. 跨域</h3><p><strong>1.&nbsp;什么是跨域</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;浏览器的同源策略限制了跨域请求资源。即当一个请求url的协议、域名、端口三者之间任意一与当前页面地址不同即为跨域。</p>
+<p><strong>2.&nbsp;实现跨域的常用方法</strong><br><strong>(1) &nbsp; jsonp</strong> （JSON+Padding）将JSON数据填充进回调函数<br>jsonp 是解决跨域问题的一种方案，不同于 json，其并不是一种数据交换格式，而只是一种绕过跨域的技巧。<br><strong>简单来说就是创建一个回调函数，然后在远程服务上调用这个函数并且将JSON 数据形式作为参数传递，完成回调。</strong> 因为在HTML标签里，一些标签比如script、img、iframe这样的拥有src属性获取资源的标签是没有跨域限制的。因此利用script加载预设的 callback 将内容传递给 js。一般来说我们约定通过一个参数来告诉服务器 JSONP 返回时应该调用的回调函数名，然后拼接出对应的 js。以下为一个简单例子。<br>html页面</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">      <span class="hljs-keyword">var</span> infoHandler = <span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)&#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data);</span><br><span class="language-javascript">      &#125;;</span><br><span class="language-javascript">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;http://a.com/info?name=a&amp;callback=infoHandler&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>服务器端返回</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># 服务器端通过获取请求参数重的callback名称， 拼出返回值。</span><br> infoHandler<span class="hljs-punctuation">(</span>&#123;<br>  <span class="hljs-string">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shirley&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-string">&quot;age&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">18</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-string">&quot;gender&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;female&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-string">&quot;idCard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;23213123231232ui323&quot;</span><br>&#125;<span class="hljs-punctuation">)</span><span class="hljs-punctuation">;</span><br></code></pre></td></tr></table></figure>
+<p>缺点是JSONP只能发GET请求，因为本质上script加载资源就是GET请求</p>
+<p><strong>(2) &nbsp; CORS</strong><br>CORS：是一个W3C标准, Cross-origin resource sharing 即 “跨域资源共享”。它允许浏览器向跨源服务器，发出<code>XMLHttpRequest</code>请求，从而克服了AJAX只能同源使用的限制。<br>CORS需要客户端和服务端同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。整个CORS通信过程，都是浏览器自动完成，不需要用户参与。因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。</p>
+<ul>
+<li>CORS请求分类<br>浏览器将CORS请求分成两类：请求<code>简单请求</code>（simple request）和<code>非简单请求</code>（not-so-simple request)。<br><strong>简单请求：</strong>    请求满足以下两个条件的就是简单请求<br>&nbsp;1. 请求方法是以下三种方法之一：HEAD,GET,POST 。<br>&nbsp;2. HTTP的头信息不超出以下几种字段<br>&nbsp;&nbsp;&nbsp;&nbsp;Accept<br>&nbsp;&nbsp;&nbsp;&nbsp;Accept-Language<br>&nbsp;&nbsp;&nbsp;&nbsp;Content-Language<br>&nbsp;&nbsp;&nbsp;&nbsp;Last-Event-ID<br>&nbsp;&nbsp;&nbsp;&nbsp;Content-type：只限于三个值application&#x2F;x-www-form-urlencoded、multipart&#x2F;form-data、text&#x2F;plain<br><strong>非简单请求：</strong> 不满足上面两个条件的就是非简单请求。<br><strong>注意</strong><br>1、对于简单请求，浏览器直接请求，会在请求头信息中，增加一个origin字段，来说明本次请求来自哪个源（协议+域名+端口）。服务器根据这个值，来决定是否同意该请求，服务器返回的响应会多几个头信息字段。<br>2、非简单请求是对那种对服务器有特殊要求的请求，都会在正式通信之前，增加一次HTTP请求，称之为预检（options请求）。浏览器会先询问服务器，当前网页所在域名是否在服务器的许可名单之中，服务器允许之后，浏览器会发出正式的XMLHttpRequest请求，否则会报错。<br><strong>options请求</strong>:  options请求是浏览器自发起的preflight request(预检请求)，获取响应后发现可以跨域，接着就发送真实的请求。</li>
+</ul>
+<ul>
+<li>服务器端实现跨域CORS接口</li>
+</ul>
+<p>1、设置<code>Access-Control-Allow-Origin</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-string">&#x27;Access-Control-Allow-Origin&#x27;</span>: <span class="hljs-string">&#x27;http://XXX.com&#x27;</span> <span class="hljs-regexp">//</span> 设置接指定地址的请求或设置为<span class="hljs-string">&#x27;*&#x27;</span> 表示接受任意域名的请求<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>除get、post、head请求方法和其它自定义的请求头 即非简单请求时。预请求验证通过才能发送。</li>
+</ol>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">&#x27;Access-Control-Allow-Methods&#x27;<span class="hljs-punctuation">:</span> &#x27;POST,PUT,HEAD&#x27;<br></code></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">&#x27;Access-Control-Allow-Headers&#x27;<span class="hljs-punctuation">:</span> &#x27;X-Test-Cors&#x27;<span class="hljs-punctuation">,</span> <span class="hljs-comment">//设置自定义的请求头</span><br></code></pre></td></tr></table></figure>
+<p>设置缓存, 允许浏览器在指定时间内，无需再发送预检请求，直接用本次结果即可。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">&#x27;Access-Control-Max-Age&#x27;<span class="hljs-punctuation">:</span> &#x27;5&#x27;<span class="hljs-punctuation">,</span>  <span class="hljs-comment">//秒为单位 -1是不缓存 5秒一下chrome都默认是5</span><br></code></pre></td></tr></table></figure>
+<p>设置是否可以携带cookie</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-symbol">&#x27;Access</span>-Control-Allow-Credentials&#x27;:  <span class="hljs-literal">true</span>，//如果<span class="hljs-keyword">Access</span>-Control-Allow-Origin字段设置* 此字段设为<span class="hljs-literal">true</span>无效<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>(3) nginx反向代理</strong><br>原理是：同源策略只是浏览器的安全策略，不是HTTP协议的一部分。服务器端调用HTTP接口只是使用HTTP协议，不会执行JS脚本，不需要同源策略，也就不存在跨越问题。<br>  <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-comment">// Nginx配置如下：</span><br> server&#123;    <br>  <span class="hljs-meta"># 监听8001端口</span><br>  listen <span class="hljs-number">8001</span><span class="hljs-punctuation">;</span><br>  <span class="hljs-meta"># 域名是localhost</span><br>  server_name localhost<span class="hljs-punctuation">;</span><br>  <span class="hljs-meta">#凡是localhost:8001/api这个样子的，都转发到真正的服务端地址http:<span class="hljs-comment">//localhost:9001</span></span><br>  location ^<span class="hljs-symbol">~ /api &#123;</span><br><span class="hljs-symbol">      proxy_pass http</span>:<span class="hljs-comment">//localhost:9001;</span><br>  &#125; <br></code></pre></td></tr></table></figure></p>
+<p><em><strong>To be continued…</strong></em></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>网络知识学习之HTTP协议(二)</div>
+      <div>http://example.com/2023/03/25/学习http内容二/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Shirley.Hou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 25, 2023</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/10/%E5%AD%A6%E4%B9%A0http%E5%86%85%E5%AE%B9%E4%B8%89/" title="网络知识学习之HTTP协议（三)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网络知识学习之HTTP协议（三)</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/15/%E5%AD%A6%E4%B9%A0http%E5%86%85%E5%AE%B9%E4%B8%80/" title="网络知识学习之HTTP协议(一)">
+                        <span class="hidden-mobile">网络知识学习之HTTP协议(一)</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

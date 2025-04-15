@@ -1,0 +1,700 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Shirley.Hou">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="概念:  SVG 是一种基于 XML 语法的图像格式，全称是可缩放矢量图（Scalable Vector Graphics）。其他图像格式都是基于像素处理的，SVG 则是属于对图像的形状描述，所以它本质上是文本文件，体积较小，且不管放大多少倍都不会失真。SVG严格遵从XML语法，并用文本格式的描述性语言来描述图像内容。  注: 矢量图位图的区别矢量图也称为面向对象的图像或绘图图像，繁体版本上称之为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识SVG">
+<meta property="og:url" content="http://example.com/2022/08/15/%E5%AD%A6%E4%B9%A0SVG%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Shirley.Hou的个人博客">
+<meta property="og:description" content="概念:  SVG 是一种基于 XML 语法的图像格式，全称是可缩放矢量图（Scalable Vector Graphics）。其他图像格式都是基于像素处理的，SVG 则是属于对图像的形状描述，所以它本质上是文本文件，体积较小，且不管放大多少倍都不会失真。SVG严格遵从XML语法，并用文本格式的描述性语言来描述图像内容。  注: 矢量图位图的区别矢量图也称为面向对象的图像或绘图图像，繁体版本上称之为">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/image4.png">
+<meta property="article:published_time" content="2022-08-15T13:08:24.000Z">
+<meta property="article:modified_time" content="2025-04-15T14:27:46.167Z">
+<meta property="article:author" content="Shirley.Hou">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image4.png">
+  
+  
+  
+  <title>初识SVG - Shirley.Hou的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Shirley.Hou的个人博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="初识SVG"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-15 21:08" pubdate>
+          August 15, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">初识SVG</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>概念:</strong></p>
+<blockquote>
+<p>SVG 是一种基于 XML 语法的图像格式，全称是可缩放矢量图（Scalable Vector Graphics）。其他图像格式都是基于像素处理的，SVG 则是属于对图像的形状描述，所以它本质上是文本文件，体积较小，且不管放大多少倍都不会失真。SVG严格遵从XML语法，并用文本格式的描述性语言来描述图像内容。</p>
+</blockquote>
+<p><strong>注: 矢量图位图的区别</strong><br>矢量图也称为面向对象的图像或绘图图像，繁体版本上称之为向量图，是计算机图形学中用点、直线或者多边形等基于数学方程的几何图元表示图像。矢量图形最大的优点是无论放大、缩小或旋转等不会失真；最大的缺点是难以表现色彩层次丰富的逼真图像效果。</p>
+<p>位图亦称为点阵图像或栅格图像，是由称作像素（图片元素）的单个点组成的。这些点可以进行不同的排列和染色以构成图样。当放大位图时，可以看见赖以构成整个图像的无数单个方块。文件类型有*.bmp、<em>.pcx、</em>.gif、<em>.jpg、</em>.tif等</p>
+<p>区别：<br>1、位图表现的色彩比较丰富，可以表现出色彩丰富的图象。而矢量图形色彩不丰富，无法表现逼真的实物，矢量图常常用来表示标识、图标、Logo等简单直接的图像。<br>2、文件大小： 由于位图表现的色彩比较丰富，所以占用的空间会很大，颜色信息越多，占用空间越大，图像越清晰，占用空间越大；由于矢量图形表现的图像颜色比较单一，所以所占用的空间会很小。(不是对比同一文件的大小)<br>3、最大的区别，矢量图形与分辨率无关，可以将它缩放到任意大小和以任意分辨率在输出设备上打印出来，都不会影响清晰度，而位图是由一个一个像素点产生，当放大图像时，像素点也放大了，但每个像素点表示的颜色是单一的，所以在位图放大后就会出现平时所见到的马赛克状。</p>
+<p>对比图：</p>
+<p><img src="/images/image4.png" srcset="/img/loading.gif" lazyload alt="效果图"></p>
+<hr>
+<p><strong>1. 呈现方式</strong></p>
+<ul>
+<li><p><strong>SVG 文件可以内嵌到网页中，成为 DOM 的一部分</strong></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;html&gt;<br>&lt;head&gt;&lt;/head&gt;<br>&lt;body&gt;<br>&lt;svg id<span class="hljs-operator">=</span><span class="hljs-string">&quot;mysvg&quot;</span><br>    xmlns<span class="hljs-operator">=</span><span class="hljs-string">&quot;http://www.w3.org/2000/svg&quot;</span><br>    version<span class="hljs-operator">=</span><span class="hljs-string">&quot;1.1&quot;</span><br>    viewBox<span class="hljs-operator">=</span><span class="hljs-string">&quot;0 0 800 600&quot;</span><br>    preserveAspectRatio<span class="hljs-operator">=</span><span class="hljs-string">&quot;xMidYMid meet&quot;</span>&gt;<br>    &lt;circle id<span class="hljs-operator">=</span><span class="hljs-string">&quot;mycircle&quot;</span> cx<span class="hljs-operator">=</span><span class="hljs-string">&quot;400&quot;</span> cy<span class="hljs-operator">=</span><span class="hljs-string">&quot;300&quot;</span> r<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span>  /&gt;<br>&lt;/svg&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>独立SVG文件</strong><br>把文本文件保存成以svg为扩展名的文件，例如sun.svg，这样的文件可以直接用浏览器打开浏览，或者用<code>&lt;img&gt;、&lt;object&gt;、&lt;embed&gt;、&lt;iframe&gt;</code>等标签插入网页。</p>
+ <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;img <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;./img/circle.svg&quot;</span>&gt;<br></code></pre></td></tr></table></figure>
+<p> 或者</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.icon</span> &#123;<br>     <span class="hljs-attribute">background</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&quot;./img/circle.svg&quot;</span>);<br> &#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p><strong>2. 文档元素介绍</strong></p>
+<ul>
+<li>svg标签<br>svg 代码都放在顶层标签<code>&lt;svg&gt;</code>之中<br><code>viewBox</code>属性的值有四个数字，分别是左上角的横坐标和纵坐标、视口的宽度和高度<br><code>width</code>属性和<code>height</code>属性： em,ex,px,pt,pc,cm,mm等长度还可以使用”%”<br>svg图像默认大小是300像素（宽） x 150像素（高）。<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;svg width<span class="hljs-operator">=</span><span class="hljs-string">&quot;300&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span>&gt;   <br>  &lt;circle cx<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span> cy<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span> r<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> style<span class="hljs-operator">=</span><span class="hljs-string">&quot;stroke: black; fill: red;&quot;</span>/&gt;<br>&lt;/svg&gt;<br></code></pre></td></tr></table></figure>
+   注：请注意开头的部分xml声明，与svg的命名空间xmlns、版本version等部分，主要是考虑兼容性的问题；这些部分在HTML5中基本都可以不用写了。</li>
+</ul>
+<p><strong>（一）基本图形元素</strong></p>
+<ul>
+<li><p>圆 circle<br>fill: 填充色<br>  stroke: 描边色<br>  stroke-width：边框粗细<br>  stroke-linecap:   在开放子路径被设置描边的情况下，用于开放自路径两端的形状<br>  stroke-dasharray:  创建虚线</p>
+  <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;circle cx<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> cy<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> r<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> fill<span class="hljs-operator">=</span><span class="hljs-string">&quot;red&quot;</span> stroke<span class="hljs-operator">=</span><span class="hljs-string">&quot;rgb(0,0,0)&quot;</span> stroke-width<span class="hljs-operator">=</span><span class="hljs-string">&quot;3&quot;</span> /&gt;<br></code></pre></td></tr></table></figure></li>
+<li><p>椭圆 ellipse</p>
+  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;ellipse <span class="hljs-attribute">cx</span>=<span class="hljs-string">&quot;60&quot;</span> <span class="hljs-attribute">cy</span>=<span class="hljs-string">&quot;60&quot;</span> <span class="hljs-attribute">ry</span>=<span class="hljs-string">&quot;40&quot;</span> <span class="hljs-attribute">rx</span>=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attribute">stroke</span>=<span class="hljs-string">&quot;black&quot;</span> <span class="hljs-attribute">stroke-width</span>=<span class="hljs-string">&quot;5&quot;</span> <span class="hljs-attribute">fill</span>=<span class="hljs-string">&quot;silver&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>直线 line </p>
+  <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;line x1<span class="hljs-operator">=</span><span class="hljs-string">&quot;0&quot;</span> y1<span class="hljs-operator">=</span><span class="hljs-string">&quot;0&quot;</span> x2<span class="hljs-operator">=</span><span class="hljs-string">&quot;200&quot;</span> y2<span class="hljs-operator">=</span><span class="hljs-string">&quot;0&quot;</span> style<span class="hljs-operator">=</span><span class="hljs-string">&quot;stroke:rgb(0,0,0);stroke-width:5&quot;</span> /&gt;<br></code></pre></td></tr></table></figure></li>
+<li><p>折线 polyline</p>
+  <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;polyline points<span class="hljs-operator">=</span><span class="hljs-string">&quot;3,3 30,28 3,53&quot;</span>  fill<span class="hljs-operator">=</span><span class="hljs-string">&quot;none&quot;</span> stroke<span class="hljs-operator">=</span><span class="hljs-string">&quot;black&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>矩形 rect</p>
+  <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;rect x<span class="hljs-operator">=</span><span class="hljs-string">&quot;0&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;0&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span> width<span class="hljs-operator">=</span><span class="hljs-string">&quot;200&quot;</span> style<span class="hljs-operator">=</span><span class="hljs-string">&quot;stroke: #70d5dd; fill: #dd524b&quot;</span> /&gt;<br></code></pre></td></tr></table></figure></li>
+<li><p>多边形 polygon</p>
+  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;polygon <span class="hljs-attribute">fill</span>=<span class="hljs-string">&quot;green&quot;</span> <span class="hljs-attribute">stroke</span>=<span class="hljs-string">&quot;orange&quot;</span> <span class="hljs-attribute">stroke-width</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attribute">points</span>=<span class="hljs-string">&quot;830,130 900,130 900,200 830,200 850,150&quot;</span>/&gt;<br></code></pre></td></tr></table></figure></li>
+<li><p>路径 path 是最通用，最强力的元素了；使用这个元素你可以实现任何其他的图形，不仅包括上面这些基本形状，也可以实现像贝塞尔曲线那样的复杂形状。这个元素控制位置和形状的只有一个参数d。<br>  d：一系列绘制指令和绘制参数(点)组合成。绘制指令分为绝对坐标指令和相对坐标指令两种，这两种指令使用的字母是一样的，就是大小写不一样，绝对指令使用大写字母，坐标也是绝对坐标；相对指令使用对应的小写字母，点的坐标表示的都是偏移量。<br>  M：移动到（moveto）将画笔移动到点(x,y)<br>  L：画直线到（lineto） 画笔从当前的点绘制线段到点(x,y)<br>  H: 画笔从当前的点绘制水平线段到点(x,y0)<br>  V: 画笔从当前的点绘制竖直线段到点(x0,y)<br>  A: 画笔从当前的点绘制一段圆弧到点(x,y)<br>  C: 参数: x1 y1, x2 y2, x y   画笔从当前的点绘制一段三次贝塞尔曲线到点(x,y)<br>  S: 参数: x2 y2, x y   特殊版本的三次贝塞尔曲线(省略第一个控制点)<br>  Q: 参数: x1 y1, x y   绘制二次贝塞尔曲线到点(x,y)<br>  T: 参数: x1 y1, x y   绘制二次贝塞尔曲线到点(x,y)<br>  Z：闭合路径</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">path</span> <span class="hljs-attr">d</span>=<span class="hljs-string">&quot;</span></span><br><span class="hljs-string"><span class="hljs-tag">  M 18,3</span></span><br><span class="hljs-string"><span class="hljs-tag">  L 46,3</span></span><br><span class="hljs-string"><span class="hljs-tag">  L 46,40</span></span><br><span class="hljs-string"><span class="hljs-tag">  L 61,40</span></span><br><span class="hljs-string"><span class="hljs-tag">  L 32,68</span></span><br><span class="hljs-string"><span class="hljs-tag">  L 3,40</span></span><br><span class="hljs-string"><span class="hljs-tag">  L 18,40</span></span><br><span class="hljs-string"><span class="hljs-tag">  Z</span></span><br><span class="hljs-string"><span class="hljs-tag">&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">path</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>  <em>备注：</em> 贝塞尔曲线是概念？可以去看看相关文章，本质是给定几个点（一般是4个）可以画出一条曲线。</p>
+</li>
+<li><p>文本 text</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;text x<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;25&quot;</span>&gt;Hello World&lt;/text&gt;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>（二）解释性元素  desc元素与title元素</strong><br>这两个元素都是辅助性的元素，用于解释相关情境；它们的内容都是文本。当SVG文档被渲染的时候，这2个元素不会被渲染到图形中。这个2个元素之间差别不是太大，title在有些实现中是作为提示信息出现的，所以通常title是放到父元素的第一个位置上。</p>
+<p><strong>（三）结构元素</strong></p>
+<ul>
+<li><p>组合 g元素<br>  g元素是一种容器，它组合一组相关的图形元素成为一个整体。这样，我们就可以对这个整体进行操作。这个元素通常可以和desc和title元素配合使用，提供文档的结构信息。结构良好的文档通常可读性和渲染效率都不错。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;svg width<span class="hljs-operator">=</span><span class="hljs-string">&quot;300&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span>&gt;  <br>  &lt;g id<span class="hljs-operator">=</span><span class="hljs-string">&quot;group&quot;</span>&gt;<br>     &lt;g id<span class="hljs-operator">=</span><span class="hljs-string">&quot;myCircle1&quot;</span> fill<span class="hljs-operator">=</span><span class="hljs-string">&quot;#53a600&quot;</span>&gt;<br>        &lt;text x<span class="hljs-operator">=</span><span class="hljs-string">&quot;25&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;20&quot;</span>&gt;圆形&lt;/text&gt;<br>        &lt;circle cx<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> cy<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> r<span class="hljs-operator">=</span><span class="hljs-string">&quot;20&quot;</span>/&gt;<br>      &lt;/g&gt;<br>      &lt;g id<span class="hljs-operator">=</span><span class="hljs-string">&quot;myCircle2&quot;</span> fill<span class="hljs-operator">=</span><span class="hljs-string">&quot;#ccc&quot;</span>&gt;<br>         &lt;text x<span class="hljs-operator">=</span><span class="hljs-string">&quot;25&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;20&quot;</span>&gt;圆形&lt;/text&gt;<br>         &lt;circle cx<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> cy<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> r<span class="hljs-operator">=</span><span class="hljs-string">&quot;20&quot;</span>/&gt;<br>      &lt;/g&gt;<br>  &lt;/g&gt;<br>&lt;/svg&gt;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><em>注:</em> g元素是可以嵌套, 组合起来的图形元素就和单个的元素一样，可以给id值，这样，需要的时候(例如动画和重用一组元素)只用引用这个id值就可以了， 组合一组图形元素可以统一设置这组元素的相关属性(fill,stroke,transform等)。</p>
+<ul>
+<li><p>模板 symbol元素<br>symbol元素用于定义图形模板(模板可以包含很多图形)，这个模板可以被use元素实例化。模板的功能与g元素很相似，都是提供一组图形对象，但是也有一些区别。与g元素不同的地方是：<br>　　1.symbol元素本身是不会被渲染的，只有symbol模板的实例会被渲染。<br>　　2.symbol元素可以拥有属性viewBox和preserveAspectRatio，这些允许symbol缩放图形元素。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;svg xmlns<span class="hljs-operator">=</span><span class="hljs-string">&quot;http://www.w3.org/2000/svg&quot;</span><br>   version<span class="hljs-operator">=</span><span class="hljs-string">&quot;1.1&quot;</span> width<span class="hljs-operator">=</span><span class="hljs-string">&quot;5cm&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;5cm&quot;</span>&gt;<br>  &lt;desc&gt;One group of two rectangles&lt;/desc&gt;<br>  &lt;symbol id<span class="hljs-operator">=</span><span class="hljs-string">&quot;group1&quot;</span> fill<span class="hljs-operator">=</span><span class="hljs-string">&quot;red&quot;</span>&gt;<br>    &lt;rect x<span class="hljs-operator">=</span><span class="hljs-string">&quot;10&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;10&quot;</span> width<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;60&quot;</span>/&gt;<br>    &lt;rect x<span class="hljs-operator">=</span><span class="hljs-string">&quot;120&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;10&quot;</span> width<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;50&quot;</span>/&gt;<br>   &lt;/symbol&gt;<br>  &lt;use href<span class="hljs-operator">=</span><span class="hljs-string">&quot;#group1&quot;</span>&gt;<br>&lt;/svg&gt;<br></code></pre></td></tr></table></figure></li>
+<li><p>定义  defs元素<br>  SVG允许定义一组对象，然后重用这组对象(注意，不仅仅是图形对象)。最常见的例子如定义渐变色，然后再其他的图形对象中赋给fill属性。渐变色定义的时候是不会渲染的，所以这类型的对象可以放到任何地方。重用对于图形对象中也是经常存在的，而且我们也不希望定义的时候直接渲染，而是想在引用的地方渲染，这个可以用defs元素实现<br>定义渐变色：</p>
+ <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;svg width<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;200&quot;</span>&gt;<br>  &lt;defs&gt;<br>    &lt;linearGradient id<span class="hljs-operator">=</span><span class="hljs-string">&quot;Gradient01&quot;</span>&gt;<br>      &lt;stop offset<span class="hljs-operator">=</span><span class="hljs-string">&quot;20%&quot;</span> stop-color<span class="hljs-operator">=</span><span class="hljs-string">&quot;#39F&quot;</span> /&gt;<br>      &lt;stop offset<span class="hljs-operator">=</span><span class="hljs-string">&quot;90%&quot;</span> stop-color<span class="hljs-operator">=</span><span class="hljs-string">&quot;#F3F&quot;</span> /&gt;<br>    &lt;/linearGradient&gt;<br>  &lt;/defs&gt;<br>  &lt;rect x<span class="hljs-operator">=</span><span class="hljs-string">&quot;1cm&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;1cm&quot;</span> width<span class="hljs-operator">=</span><span class="hljs-string">&quot;6cm&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;1cm&quot;</span> fill<span class="hljs-operator">=</span><span class="hljs-string">&quot;url(#Gradient01)&quot;</span>  /&gt;<br>&lt;/svg&gt;<br></code></pre></td></tr></table></figure>
+<p> 图形：</p>
+ <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;svg width<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;200&quot;</span>&gt;<br>   &lt;defs&gt;<br>       &lt;rect id<span class="hljs-operator">=</span><span class="hljs-string">&quot;MyRect&quot;</span> width<span class="hljs-operator">=</span><span class="hljs-string">&quot;60&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;10&quot;</span>/&gt;<br>    &lt;/defs&gt;<br>    &lt;use x<span class="hljs-operator">=</span><span class="hljs-string">&quot;20&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;10&quot;</span> href<span class="hljs-operator">=</span><span class="hljs-string">&quot;#MyRect&quot;</span> /&gt;<br>&lt;/svg&gt;<br></code></pre></td></tr></table></figure>
+<p>注意区别：其实作为容器对象的g元素、symbol元素、defs元素都不同程度上提供了重用的作用，只不过每个元素的特性可能少许不同：比如g元素是直接渲染的，symbol和defs不会直接渲染，symbol含有viewBox属性，会创建新的视窗。</p>
+</li>
+<li><p>use  复制一个形状<br><code>href</code>属性指定所要复制的节点，<code>x</code>属性和<code>y</code>属性是<code>&lt;use&gt;</code>左上角的坐标(在原图基础上的平移距离)。另外，还可以指定width和height坐标。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;svg width<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;100&quot;</span>&gt;<br>  &lt;circle id<span class="hljs-operator">=</span><span class="hljs-string">&quot;myCircle&quot;</span> cx<span class="hljs-operator">=</span><span class="hljs-string">&quot;5&quot;</span> cy<span class="hljs-operator">=</span><span class="hljs-string">&quot;5&quot;</span> r<span class="hljs-operator">=</span><span class="hljs-string">&quot;4&quot;</span>/&gt;<br>  &lt;use href<span class="hljs-operator">=</span><span class="hljs-string">&quot;#myCircle&quot;</span> x<span class="hljs-operator">=</span><span class="hljs-string">&quot;10&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;0&quot;</span> fill<span class="hljs-operator">=</span><span class="hljs-string">&quot;blue&quot;</span> /&gt;<br>  &lt;use href<span class="hljs-operator">=</span><span class="hljs-string">&quot;#myCircle&quot;</span> x<span class="hljs-operator">=</span><span class="hljs-string">&quot;20&quot;</span> y<span class="hljs-operator">=</span><span class="hljs-string">&quot;0&quot;</span> fill<span class="hljs-operator">=</span><span class="hljs-string">&quot;white&quot;</span> stroke<span class="hljs-operator">=</span><span class="hljs-string">&quot;blue&quot;</span> /&gt;<br>&lt;/svg&gt;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>渐变元素、阴影、动画等其他元素见下章</strong></p>
+<p>3、渲染顺序<br>SVG是严格按照定义元素的顺序来渲染的，这个与HTML靠z-index值来控制分层不一样。在SVG中，写在前面的元素先被渲染，写在后面的元素后被渲染。后渲染的元素会覆盖前面的元素，虽然有时候受透明度影响，看起来不是被覆盖的，但是SVG确实是严格按照先后顺序来渲染的。</p>
+<p><em><strong>To be continued…</strong></em></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/SVG/" class="category-chain-item">SVG</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>初识SVG</div>
+      <div>http://example.com/2022/08/15/学习SVG基本知识/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Shirley.Hou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 15, 2022</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/09/%E8%AE%A2%E9%98%85%E6%B6%88%E6%81%AF/" title="订阅消息">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">订阅消息</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/30/immutableData/" title="Immutable Data">
+                        <span class="hidden-mobile">Immutable Data</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

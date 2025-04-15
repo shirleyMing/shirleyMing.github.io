@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Shirley.Hou">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1、面向对象编程什么是编程对象编程面向对象是一种编程思想，经常被拿来和面向过程比较。其中：面向过程关注的重点是动词，是分析出解决问题需要的步骤，然后编写函数实现每个步骤，最后依次调用函数。而面向对象关注的重点是主谓，是把构成问题的事物拆解为各个对象，而拆解出对象的目的也不是为了实现某个步骤，而是为了描述这个事物在当前问题中的各种行为。 面向对象的特点面向对象的特点是：封装继承多态封装：让使用对象的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象编程">
+<meta property="og:url" content="http://example.com/2021/04/08/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Shirley.Hou的个人博客">
+<meta property="og:description" content="1、面向对象编程什么是编程对象编程面向对象是一种编程思想，经常被拿来和面向过程比较。其中：面向过程关注的重点是动词，是分析出解决问题需要的步骤，然后编写函数实现每个步骤，最后依次调用函数。而面向对象关注的重点是主谓，是把构成问题的事物拆解为各个对象，而拆解出对象的目的也不是为了实现某个步骤，而是为了描述这个事物在当前问题中的各种行为。 面向对象的特点面向对象的特点是：封装继承多态封装：让使用对象的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-08T11:16:41.000Z">
+<meta property="article:modified_time" content="2025-04-15T14:34:35.227Z">
+<meta property="article:author" content="Shirley.Hou">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>面向对象编程 - Shirley.Hou的个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Shirley.Hou的个人博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="面向对象编程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-04-08 19:16" pubdate>
+          April 8, 2021 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">面向对象编程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1、面向对象编程"><a href="#1、面向对象编程" class="headerlink" title="1、面向对象编程"></a>1、面向对象编程</h3><h5 id="什么是编程对象编程"><a href="#什么是编程对象编程" class="headerlink" title="什么是编程对象编程"></a>什么是编程对象编程</h5><p>面向对象是一种编程思想，经常被拿来和面向过程比较。<br>其中：<br><code>面向过程</code>关注的重点是动词，是分析出解决问题需要的步骤，然后编写函数实现每个步骤，最后依次调用函数。<br>而<code>面向对象</code>关注的重点是主谓，是把构成问题的事物拆解为各个对象，而拆解出对象的目的也不是为了实现某个步骤，而是为了描述这个事物在当前问题中的各种行为。</p>
+<h5 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h5><p>面向对象的特点是：封装继承多态<br><code>封装</code>：让使用对象的人不考虑内部实现，只考虑功能使用 把内部的代码保护起来，只留出一些 api 接口供用户使用<br><code>继承</code>：就是为了代码的复用，从父类上继承出一些方法和属性，子类也有自己的一些属性<br><code>多态</code>：是不同对象作用于同一操作产生不同的效果。多态的思想实际上是把“想做什么”和“谁去做“分开</p>
+<h5 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h5><p>比如下棋的过程</p>
+<ul>
+<li>面向过程是这样的：开局 -&gt; 白方下棋 -&gt; 棋盘棋盘 -&gt; 检查胜负 -&gt; 黑方下棋 -&gt; 棋盘棋盘 -&gt; 检查胜负 -&gt;…….循环<br>用代码表示可能的一连串函数调用的</li>
+</ul>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-built_in">init</span>();<br><span class="hljs-built_in">whitePlay</span>(); <span class="hljs-comment">// 里面实现一遍下棋的操作</span><br><span class="hljs-built_in">repaint</span>(); <span class="hljs-comment">// 棋盘展示</span><br><span class="hljs-built_in">check</span>();<br><span class="hljs-built_in">blackPlay</span>(); <span class="hljs-comment">// 再单独实现一遍下棋的操作</span><br><span class="hljs-built_in">repaint</span>(); <span class="hljs-comment">// 棋盘展示</span><br><span class="hljs-built_in">check</span>();<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>面向对象表示(重点是主谓)：棋盘对象，棋手<br>棋盘.开局 -&gt; 选手.下棋 -&gt; 棋盘.重新展示 -&gt; 棋盘.检查胜负 -&gt; 选手.下棋 -&gt; 棋盘.重新展示 -&gt; 棋盘.检查胜负<br>用代码表示可能是</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">const</span> checkerBoard = <span class="hljs-keyword">new</span> CheckerBoard(); <span class="hljs-comment">// CheckerBoard 类内部封账了棋盘的操作，比如初始化棋盘，检查胜负关系等</span><br><span class="hljs-keyword">const</span> whitePlayer = <span class="hljs-keyword">new</span> Player(<span class="hljs-string">&#x27;white&#x27;</span>); <span class="hljs-comment">// Player 类内部封装了各种玩家的操作，比如等待，落棋，悔棋</span><br><span class="hljs-keyword">const</span> blackPlayer = <span class="hljs-keyword">new</span> Player(<span class="hljs-string">&#x27;black&#x27;</span>);<br><br>whitePlayer.start();<span class="hljs-comment">// emit()</span><br></code></pre></td></tr></table></figure>
+
+<p>在下棋过程中，面向对象的特性如果体现</p>
+<ol>
+<li>封装：Player, CheckerBoard 类，使用的时候并不需要知道内部实现了什么，只需要考虑暴露出的 api 的使用</li>
+<li>继承：whitePlayer 和 blackPlayer 都继承自 Player，都可以直接使用 Player 的各种方法和属性</li>
+<li>多态：whitePlayer.start() 和 blackPlayer.start() 下棋的颜色分别是白色和黑色</li>
+</ol>
+<p>#####什么时候适合使用面向对象思想</p>
+<ul>
+<li>在比较复杂的额问题面前，或者说参与方比较多的时候。可以很好的简化问题，更有利于扩展和维护。<br>比如 现在下棋需要新增一个红旗手，面向对象只需要在<code>const redPlayer = new Player(&#39;red&#39;)</code>, 而面向过程则需要再去整个过程的逻辑中再添加，很容易影响原有逻辑。</li>
+<li>在比较简单的问题，可以一步步的按照步骤来调用，其实也可以面向对象。</li>
+</ul>
+<p>这只是一种思想，并不是一种约定，肯定是哪个方便用哪种。</p>
+<h5 id="JS中的面向对象"><a href="#JS中的面向对象" class="headerlink" title="JS中的面向对象"></a>JS中的面向对象</h5><p>(1) 对象包含什么<br>属性和方法。</p>
+<p>(2) 内置的对象<br>Object Array Date Function RegExp</p>
+<p>(3) 创建对象</p>
+<ol>
+<li>简单方式<br>每一个新对象都要重新写一遍 color 和 start 的赋值</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-title class_">Player</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br><span class="hljs-title class_">Player</span>.<span class="hljs-property">color</span> = <span class="hljs-string">&quot;white&quot;</span>;<br><span class="hljs-title class_">Player</span>.<span class="hljs-property">start</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;white下棋&quot;</span>);<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>如果实现黑棋手，就得再拷贝一份，太冗余</p>
+<ol start="2">
+<li>工厂模式</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createObject</span>(<span class="hljs-params">color: string, start: () =&gt; <span class="hljs-keyword">void</span></span>) &#123;<br>  <span class="hljs-keyword">const</span> <span class="hljs-title class_">Player</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br>  <span class="hljs-title class_">Player</span>.<span class="hljs-property">color</span> = color;<br>  <span class="hljs-title class_">Player</span>.<span class="hljs-property">start</span> = start<br>  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Player</span>;<br>&#125;<br><span class="hljs-title function_">createObject</span>(<span class="hljs-string">&#x27;white&#x27;</span>);<br><span class="hljs-title function_">createObject</span>(<span class="hljs-string">&#x27;black&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p>以上两种方式都无法识别对象类型，比如 Player 的类型只是 Object</p>
+<ol start="3">
+<li>构造函数&#x2F;实例</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Player</span>(<span class="hljs-params">color</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">color</span> = color;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">start</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(color + <span class="hljs-string">&quot;下棋&quot;</span>);<br>  &#125;;<br>&#125;<br><span class="hljs-keyword">const</span> whitePlayer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Player</span>(<span class="hljs-string">&quot;white&quot;</span>);<br><span class="hljs-keyword">const</span> blackPlayer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Player</span>(<span class="hljs-string">&quot;black&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>缺点：<br>通过 this 添加的属性和方法都会在内存中复制一份，这样就会造成内存的浪费。<br>好处：<br>但是这样创建的好处是即使改变了某一个对象的属性或方法，不会影响其他的对象（因为每一个对象都是复制的一份）</p>
+<p><strong>Tips</strong>. 怎么看函数是不是在内存中创建了多次呢？<br>比如 3. 构造函数中，我们可以看到 whitePlayer.start &#x3D;&#x3D;&#x3D; blackPlayer.start<br>&#x2F;&#x2F; 输出 false</p>
+<ol start="4">
+<li>原型</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Player</span>(<span class="hljs-params">color</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">color</span> = color;<br>&#125;<br><span class="hljs-title class_">Player</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">start</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(color + <span class="hljs-string">&quot;下棋&quot;</span>);<br>&#125;;<br><span class="hljs-keyword">const</span> whitePlayer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Player</span>(<span class="hljs-string">&quot;white&quot;</span>);<br><span class="hljs-keyword">const</span> blackPlayer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Player</span>(<span class="hljs-string">&quot;black&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>优点： start在内存中只存一份，通过原型继承的方法并不是自身的，我们要在原型链上一层一层的查找，这样创建的好处是只在内存中创建一次，实例化的对象都会指向这个 prototype 对象。</p>
+<ol start="5">
+<li>静态属性</li>
+</ol>
+<p>是绑定在构造函数上的属性方法，需要通过构造函数访问<br>比如我们想看一下一共创建了多少个玩家的实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Player</span>(<span class="hljs-params">color</span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">color</span> = color;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Player</span>.<span class="hljs-property">total</span>) &#123;<br>    <span class="hljs-title class_">Player</span>.<span class="hljs-property">total</span> = <span class="hljs-number">0</span>;<br>  &#125;<br>  <span class="hljs-title class_">Player</span>.<span class="hljs-property">total</span>++;<br>&#125;<br><br><span class="hljs-keyword">let</span> p1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Player</span>(<span class="hljs-string">&quot;white&quot;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Player</span>.<span class="hljs-property">total</span>); <span class="hljs-comment">// 1</span><br><span class="hljs-keyword">let</span> p2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Player</span>(<span class="hljs-string">&quot;black&quot;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Player</span>.<span class="hljs-property">total</span>); <span class="hljs-comment">// 2</span><br></code></pre></td></tr></table></figure>
+<p>参考资料<br><a href="'https://zhuanlan.zhihu.com/p/28427324'">面向对象和面向过程</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JS/" class="category-chain-item">JS</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>面向对象编程</div>
+      <div>http://example.com/2021/04/08/面向对象编程/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Shirley.Hou</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 8, 2021</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/20/%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" title="原型和原型链">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">原型和原型链</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/19/React%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/" title="React事件机制">
+                        <span class="hidden-mobile">React事件机制</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
