@@ -1,8 +1,7 @@
 ---
 title: 滚动条挤占内容宽度，影响布局
 date: 2020-02-26 10:10:35
-tags: Css
-categories: Css
+categories: CSS
 ---
 
 >问题: 当容器有一定的高度(设有固定高度或者是最大高度)，但是内容高度不确定，有可能会撑开父容器产生滚动条，也有可能不产生。但是因为滚动条出现，滚动条也需要占位置，容器内容宽度就会被挤压
@@ -41,10 +40,6 @@ categories: Css
   没有滚动条的效果图：
 ![效果图1](/images/image1.jpg)
 
-<!-- ![image.png](https://upload-images.jianshu.io/upload_images/12697150-bf768fd63e094ca3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) -->
-
-
-
 上面为灰色是`container`灰色块，`item`为里面的小方块，图为四个一排的列表，当`item`超过4个，就会超出父元素高度，`container`就会产生滚动条。要求是灰色容易左右两边留白一样，中间子元素的间距相等。
 
 未产生滚动条`container`容器的内容宽度是420px - 40px = 380px(父元素的宽度减去左右padding的宽度)。剩余的宽度 380px - 360px = 20px  margin-right的值就为 calc(20px / 3)。
@@ -63,9 +58,6 @@ chrome下overflow有个新的属性值overlay，这个属性简直就是为了�
 有滚动条的效果:
 ![效果图2](/images/image2.jpg)
 
-<!-- ![image.png](https://upload-images.jianshu.io/upload_images/12697150-fd51faeb73ac2495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) -->
-
-
 **解决2. 使用100%**
 设置100%指的是可用宽度，是不含滚动条的宽度,
 
@@ -76,8 +68,6 @@ chrome下overflow有个新的属性值overlay，这个属性简直就是为了�
 这样子设置之后，在有滚动条和滚动条时，margin-right计算的值不同。
 有滚动条的效果：
 ![效果图3](/images/image3.jpg)
-
-<!-- ![image.png](https://upload-images.jianshu.io/upload_images/12697150-d07f746507854aa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) -->
 
 
 
