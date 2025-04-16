@@ -26,15 +26,15 @@
 <meta property="og:site_name" content="Shirley.Hou的个人博客">
 <meta property="og:description" content="HTTP(Hyper Text Transfer Protocol)&lt;超文本传输协议&gt;的缩写.是用于从WWW服务器传输超文本到本地浏览器的传输协议.HTTP是一个应用层协议,由请求和响应构成,是一个标准的个客户端和服务器模型  1. http协议发展史HTTP&#x2F;0.9HTTP 于 1990 年问世。那时的 HTTP 并没有作为正式的标准被建立。现在的 HTTP 其实含有 H">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/image12.png">
+<meta property="og:image" content="http://example.com/images/image12.jpg">
 <meta property="og:image" content="http://example.com/images/image13.png">
 <meta property="og:image" content="http://example.com/images/image14.png">
 <meta property="og:image" content="http://example.com/images/image15.png">
 <meta property="article:published_time" content="2023-02-15T02:36:12.000Z">
-<meta property="article:modified_time" content="2025-04-15T14:28:08.224Z">
+<meta property="article:modified_time" content="2025-04-16T07:22:02.540Z">
 <meta property="article:author" content="Shirley.Hou">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/image12.png">
+<meta name="twitter:image" content="http://example.com/images/image12.jpg">
   
   
   
@@ -280,7 +280,7 @@
 <p>1.1 版增加了请求命令（OPTIONS、PUT、PATCH、DELETE、TRACE、CONNECTION。客户端请求的头信息新增了Host字段，用来指定服务器的域名。<br>1.1 版的最大变化，就是引入了持久连接（persistent connection），即TCP连接默认不关闭，可以被多个请求复用，不用声明<code>Connection: keep-alive</code>。<br>客户端和服务器发现对方一段时间没有活动，就可以主动关闭连接。不过，规范的做法是，客户端在最后一个请求时，发送Connection: close，明确要求服务器关闭TCP连接。<br>目前，对于同一个域名，大多数浏览器允许同时建立6个持久连接。</p>
 <p>缺点: 虽然1.1版允许复用TCP连接，但是同一个TCP连接里面，所有的数据通信是按次序进行的。服务器只有处理完一个回应，才会进行下一个回应。要是前面的回应特别慢，后面就会有许多请求排队等着。这称为<code>队头堵塞</code>。<br>为了避免这个问题，只有两种方法：一是减少请求数，二是同时多开持久连接。这导致了很多的网页优化技巧，比如合并脚本和样式表、将图片嵌入CSS代码、域名分片（domain sharding）等等。如果HTTP协议设计得更好一些，这些额外的工作是可以避免的。</p>
 <p><strong>HTTP&#x2F;2.0</strong><br>HTTP&#x2F;2.0版本中所有数据以二进制（最小数据单位是帧）传输，HTTP&#x2F;1.1中大部分数据通过字符串的形式；同一个连接里面发送多个请求不再需要按照顺序来；头信息压缩以及推送等提高效率的功能。 HTTP&#x2F;2.0 正在制订中，但要达到 较高的使用覆盖率，仍需假以时日。</p>
-<h3 id="2-网络基础"><a href="#2-网络基础" class="headerlink" title="2.  网络基础"></a>2.  网络基础</h3><h5 id="2-1经典五层模型"><a href="#2-1经典五层模型" class="headerlink" title="2.1经典五层模型"></a>2.1经典五层模型</h5><p><img src="/images/image12.png" srcset="/img/loading.gif" lazyload alt="五层模型_.pic.jpg"></p>
+<h3 id="2-网络基础"><a href="#2-网络基础" class="headerlink" title="2.  网络基础"></a>2.  网络基础</h3><h5 id="2-1经典五层模型"><a href="#2-1经典五层模型" class="headerlink" title="2.1经典五层模型"></a>2.1经典五层模型</h5><p><img src="/images/image12.jpg" srcset="/img/loading.gif" lazyload alt="五层模型_.pic.jpg"></p>
 <ul>
 <li>物理层主要作用是定义物理设备如何传输数据，机器的硬件，网卡端口，网线等。</li>
 <li>数据链路层在通信的实体间建立数据链路连接，比如最基础的数据传输数据流，可以自己选择二进制或者ASCII码形式等。</li>
